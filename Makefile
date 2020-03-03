@@ -12,6 +12,8 @@
 
 NAME		=	libasm.a
 
+NAME_TEST	=	exec_tests
+
 SRCS		=	ft_read.s	\
 				ft_write.s	\
 				ft_strcpy.s	\
@@ -23,7 +25,7 @@ PATH_SRCS	=	./srcs
 
 OBJS		=	$(SRCS:.s=.o)
 
-ASM		=	nasm
+ASM			=	nasm
 
 ASFLAGS		+=	-fmacho64
 
@@ -38,9 +40,13 @@ $(NAME)		:	$(OBJS)
 				ranlib $(NAME)
 
 clean		:
-				rm $(OBJS)
+				rm -f $(OBJS)
 
 fclean		:	clean
-				rm $(NAME)
+				rm -f $(NAME) $(NAME_TEST)
 
 re			:	fclean all
+
+test		:	re
+				gcc -o $(NAME_TEST) -Wall -Werror -Wextra main.c -L. -lasm
+				rm -f $(OBJS)

@@ -81,14 +81,12 @@
 ** printf("%s[%d]]\n", buf2, n_ft);
 */
 
-int		main(int argc, char **argv)
+int		main(void)
 {
 	char	buf_senten[] = "coucou                      ";
 	char	buf_2_senten[] = "coucou                     ";
 	char	buf_big_senten[] = "Salut a tous les amis c'est david lafarge";
 	char	buf_2_big_senten[] = "Salut a tous les amis c'est david lafarge";
-	char	*truc = "Hey ";
-	char	*fdp = "HEY ";
 
 	printf("%s%sft_strlen%s%s\n", TOP, MID_L, MID_R, TOP);
 	printf("int	ft_strlen(char *str);\n\n");
@@ -118,9 +116,61 @@ int		main(int argc, char **argv)
 	printf("int	ft_strcmp(char *s1, char *s1);\n\n");
 	printf("For s1 = \"coucou\", s2 = \"coucoux\"\n");
 	printf("libc = [%d]\n", strcmp("coucou", "coucoux"));
-	// printf("ft_  = [%d]\n", ft_strcmp(truc, fdp));
+	printf("ft_  = [%d]\n", ft_strcmp("coucou", "coucoux"));
+	printf("\n");
+	printf("For s1 = \"coucoux\", s2 = \"coucou\"\n");
+	printf("libc = [%d]\n", strcmp("coucoux", "coucou"));
+	printf("ft_  = [%d]\n", ft_strcmp("coucoux", "coucou"));
+	printf("\n");
+	printf("For s1 = \"coucou\", s2 = \"coucou\"\n");
+	printf("libc = [%d]\n", strcmp("coucou", "coucou"));
+	printf("ft_  = [%d]\n", ft_strcmp("coucou", "coucou"));
+	printf("\n");
+	printf("For s1 = \"\", s2 = \"\"\n");
+	printf("libc = [%d]\n", strcmp("", ""));
+	printf("ft_  = [%d]\n", ft_strcmp("", ""));
+	printf("\n");
+	printf("For s1 = \"HEY\", s2 = \"\"\n");
+	printf("libc = [%d]\n", strcmp("HEY", ""));
+	printf("ft_  = [%d]\n", ft_strcmp("HEY", ""));
+	printf("\n");
 	printf("%s%sft_strdup%s%s\n", TOP, MID_L, MID_R, TOP);
+	printf("char	*ft_strdup(char *str);\n\n");
+	printf("For str = \"coucou les zamis\"\n");
+	printf("libc = [%s]\n", strdup("coucou les zamis"));
+	printf("ft_  = [%s]\n", ft_strdup("coucou les zamis"));
+	printf("\n");
+	printf("For str = \"\"\n");
+	printf("libc = [%s]\n", strdup(""));
+	printf("ft_  = [%s]\n", ft_strdup(""));
+	printf("\n");
+	printf("For str = \"D\"\n");
+	printf("libc = [%s]\n", strdup("D"));
+	printf("ft_  = [%s]\n", ft_strdup("D"));
+	printf("\n");
 	printf("%s%s ft_read %s%s\n", TOP, MID_L, MID_R, TOP);
+	char buf[1000];
+	char buf2[1000];
+	printf("int	ft_read(int fd, char *buf, int bytes);\n\n");
+	printf("Type something for libc : ");
+	fflush(stdout);
+	read(0, buf, 100);
+	buf[99] = '\0';
+	printf("[%s]\n", buf);
+	printf("Type something for libasm : ");
+	fflush(stdout);
+	ft_read(0, buf2, 100);
+	buf2[99] = '\0';
+	printf("[%s]\n", buf2);
+	printf("\n");
 	printf("%s%sft_write %s%s\n", TOP, MID_L, MID_R, TOP);
+	printf("int	ft_write(int fd, char *buf, int bytes);\n\n");
+	fflush(stdout);
+	int write_ret = write(1, "All this message is write this libc !\n", 38);
+	int ft_write_ret = ft_write(1, "All this message is write this libasm !\n", 40);
+	printf("libc return of write of previous msg = [%d]\n", write_ret);
+	printf("libasm return of ft_write of previous msg = [%d]\n", ft_write_ret);
+	printf("libc error return of write = [%zd]\n", write(-9, "", 1));
+	printf("libasm error return of ft_write = [%zd]\n", write(-9, "", 1));
 	return (0);
 }

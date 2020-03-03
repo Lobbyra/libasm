@@ -14,8 +14,20 @@ _ft_strcmp:
 			inc		rsi
 			jmp		_ft_strcmp		; recursion
 
-exit:	
-			movzx	rax, al
-			movzx	r8, bl
-			sub		rax, r8
+eq:
+			mov		rax, 0
 			ret
+
+less:
+			mov		rax, -1
+			ret
+
+greater:
+			mov		rax, 1
+			ret
+
+exit:	
+			cmp		al, bl			; Test si *rdi == *rsi
+			jl		less			; If al < bl
+			jg		greater			; If al > bl
+			je		eq				; If al == bl
